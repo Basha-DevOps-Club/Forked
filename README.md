@@ -21,7 +21,7 @@ The learning platform for DevOps Club. Members learn (or review) the basics of C
 
 ## Learning format
 
-Hands-on lessons and projects. Content and projects are mainly pulled from [Hack Club](https://hackclub.com), [W3Schools](https://www.w3schools.com), and other free public-domain or MIT-licensed material — curated into a structured path rather than written from scratch.
+Hands-on lessons and projects, curated into a structured path rather than written from scratch. The curriculum links out to free resources like [Hack Club](https://hackclub.com) and [W3Schools](https://www.w3schools.com), and only incorporates material directly when its license permits it (public domain or MIT-licensed).
 
 ## Planned tech stack
 
