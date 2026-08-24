@@ -15,7 +15,7 @@ Please **do not** report security vulnerabilities through public GitHub issues.
 Instead, report them privately using one of the following:
 
 - **GitHub private vulnerability reporting**: use the ["Report a vulnerability"](../../security/advisories/new) button under the repository's Security tab (preferred).
-- **Email**: team@aigenie.biz
+- **Email**: devopsclubofficial@gmail.com
 
 When reporting, please include:
 
