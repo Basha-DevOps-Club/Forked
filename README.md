@@ -16,12 +16,21 @@ The learning platform for DevOps Club. Members learn (or review) the basics of C
    - **Front end**
    - **AI engineer**
    - **Data science**
-3. **Student profiles** — project work from the track becomes a portfolio profile that showcases what the member can actually do.
+
+   Each track pairs with an entry-level **industry certification** (for example GitHub Foundations for fundamentals, Azure AI Fundamentals for the AI track). Prep happens in-platform; the exam is taken with the vendor; the credential goes on the profile.
+3. **Student profiles** — project work from the track, plus any certifications earned, becomes a portfolio profile that showcases what the member can actually do.
 4. **Matching** — profiles connect members to **unpaid internships**, either through **AI matching** (pairs students with opportunities by specialty) or **businesses** browsing profiles for the skills they need. The exact matching mechanics are still being figured out.
 
 ## Learning format
 
-Hands-on lessons and projects, curated into a structured path rather than written from scratch. The curriculum links out to free resources like [Hack Club](https://hackclub.com) and [W3Schools](https://www.w3schools.com), and only incorporates material directly when its license permits it (public domain or MIT-licensed).
+Every lesson has two halves, and nothing sends the student to an outside site to learn:
+
+- **Learn (web)** — a short, interactive explanation of the concept, Brilliant-style: one idea per screen with something to predict, fill in, or reorder before moving on. Not video-then-quiz.
+- **Do (in the real tool)** — a Forked companion extension inside VS Code (or Godot for game dev) guides the student step by step, checks each step against the actual project state, and pops up the next thing to do. Real terminal, real git, real runtime.
+
+The web app is also home base: the learning path, progress, the student profile, and matching. Full design in [docs/learning-model.md](docs/learning-model.md).
+
+Lessons are club-authored. External resources are reference material for authors; content is only incorporated directly when its license permits it (public domain or MIT-licensed).
 
 ## Planned tech stack
 
@@ -34,14 +43,17 @@ Hands-on lessons and projects, curated into a structured path rather than writte
 - **PostHog** for analytics
 - **Vitest** for testing
 - **npm** as the package manager
+- **VS Code extension** (TypeScript, VS Code Extension API) for the in-editor Do half
+- **Godot editor plugin** (GDScript) for the game dev track
 
 ## Roadmap
 
 Near-term focus, in order:
 
-1. **Define the curriculum** — nail down the fundamentals content and the four track outlines; pick the Hack Club / W3Schools material each stage pulls from.
-2. **Build the MVP** — student accounts, the fundamentals → specialize flow, and basic project profiles.
-3. Later: business accounts, profile browsing, and the AI matching layer.
+1. **Define the curriculum** — nail down the fundamentals content and the four track outlines; decide the Learn blocks and Do steps each lesson uses (see [docs/learning-model.md](docs/learning-model.md)).
+2. **Build the MVP** — student accounts, the web Learn half with the path map, the VS Code extension for the Do half, and the onboarding, git, and JS fundamentals modules.
+3. **Then** — the remaining fundamentals modules, the Godot plugin, project profiles, and the fundamentals → specialize flow.
+4. Later: business accounts, profile browsing, and the AI matching layer.
 
 ## For officers & contributors
 
@@ -49,7 +61,7 @@ This repo is where the platform gets built. While we're in planning:
 
 - Curriculum ideas and track outlines go in `docs/`.
 - Open an issue to propose changes to the flow above before building against it.
-- Big decisions still open: matching mechanics (AI vs. manual browse vs. both), and how businesses onboard.
+- Big decisions still open: what devices members have (the Do half needs desktop VS Code), which certification the game dev track uses and who pays for exams, matching mechanics (AI vs. manual browse vs. both), and how businesses onboard. See the open decisions in [docs/learning-model.md](docs/learning-model.md).
 
 ## License
 
