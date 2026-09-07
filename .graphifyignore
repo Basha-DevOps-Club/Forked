@@ -1,0 +1,3 @@
+# Vendored graphify skill copies and agent config are tooling, not Forked content.
+.claude/
+.agents/
