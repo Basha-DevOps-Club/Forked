@@ -1,0 +1,259 @@
+{
+  "meta": {
+    "name": "Forked Design Tokens",
+    "schemaVersion": "1.0.0",
+    "description": "Platform-agnostic source tokens for the Forked Learn web app and companion editor experiences.",
+    "colorVariantContract": {
+      "base": "Approved identity color for non-text accents, diagrams, badges, and progress.",
+      "action": "Accessible light-appearance fill for controls using color.onAccent.light.",
+      "text": "Accessible light-appearance value for links, labels, and other small text.",
+      "dark": "Accessible dark-appearance value for fills, focus, progress, links, and labels using color.onAccent.dark when text appears on the color."
+    },
+    "accessibility": {
+      "standard": "WCAG 2.2 AA",
+      "normalTextMinimum": "4.5:1",
+      "largeTextAndInteractiveBoundaryMinimum": "3:1",
+      "testedPairs": [
+        "color.accent.*.action with color.onAccent.light",
+        "color.accent.*.text on color.neutral.light.canvas and color.neutral.light.surface",
+        "color.accent.*.dark on color.neutral.dark.canvas and color.neutral.dark.surface",
+        "color.onAccent.dark on color.accent.*.dark"
+      ]
+    }
+  },
+  "color": {
+    "neutral": {
+      "light": {
+        "canvas": "#F7F1E8",
+        "surface": "#FFFCF7",
+        "text": "#1C1813",
+        "muted": "#70675D",
+        "border": "#E3D8C9",
+        "borderStrong": "#958A7F"
+      },
+      "dark": {
+        "canvas": "#17120D",
+        "surface": "#211A13",
+        "text": "#FAF4EC",
+        "muted": "#BAAEA1",
+        "border": "#3E3227",
+        "borderStrong": "#776B60"
+      }
+    },
+    "code": {
+      "lightBackground": "#1A1611",
+      "darkBackground": "#0C0906",
+      "text": "#FAF4EC"
+    },
+    "onAccent": {
+      "light": "#FFFCF7",
+      "dark": "#17120D"
+    },
+    "accent": {
+      "cerulean": {
+        "base": "#087EA4",
+        "action": "#006E93",
+        "text": "#006287",
+        "dark": "#51B1D9"
+      },
+      "violet": {
+        "base": "#7D63A8",
+        "action": "#6D5397",
+        "text": "#62488A",
+        "dark": "#AF95DE"
+      },
+      "rose": {
+        "base": "#A75664",
+        "action": "#954655",
+        "text": "#893B4A",
+        "dark": "#DE8895"
+      },
+      "coral": {
+        "base": "#A85A46",
+        "action": "#964A37",
+        "text": "#893E2B",
+        "dark": "#DF8C76"
+      },
+      "amber": {
+        "base": "#936B17",
+        "action": "#825B00",
+        "text": "#765000",
+        "dark": "#C79D51"
+      },
+      "emerald": {
+        "base": "#358557",
+        "action": "#227548",
+        "text": "#10693D",
+        "dark": "#6AB987"
+      }
+    },
+    "track": {
+      "frontEnd": {
+        "base": "#087EA4",
+        "dark": "#51B1D9"
+      },
+      "gameDevelopment": {
+        "base": "#7D63A8",
+        "dark": "#AF95DE"
+      },
+      "aiEngineering": {
+        "base": "#358557",
+        "dark": "#6AB987"
+      },
+      "dataScience": {
+        "base": "#936B17",
+        "dark": "#C79D51"
+      }
+    },
+    "status": {
+      "info": {
+        "base": "#087EA4",
+        "text": "#006287",
+        "dark": "#51B1D9"
+      },
+      "success": {
+        "base": "#358557",
+        "text": "#10693D",
+        "dark": "#6AB987"
+      },
+      "warning": {
+        "base": "#936B17",
+        "text": "#765000",
+        "dark": "#C79D51"
+      },
+      "error": {
+        "base": "#A75664",
+        "text": "#893B4A",
+        "dark": "#DE8895"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "interface": "Manrope, ui-sans-serif, system-ui, sans-serif",
+      "code": "JetBrains Mono, ui-monospace, SFMono-Regular, Consolas, monospace"
+    },
+    "fontWeight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "fontSize": {
+      "caption": "12px",
+      "label": "14px",
+      "body": "16px",
+      "bodyLarge": "18px",
+      "headingSmall": "24px",
+      "headingMedium": "32px",
+      "headingLarge": "40px"
+    },
+    "lineHeight": {
+      "caption": "16px",
+      "label": "20px",
+      "body": "24px",
+      "bodyLarge": "28px",
+      "headingSmall": "32px",
+      "headingMedium": "40px",
+      "headingLarge": "48px"
+    },
+    "styles": {
+      "body": {
+        "fontFamily": "interface",
+        "fontSize": "body",
+        "lineHeight": "body",
+        "fontWeight": "regular"
+      },
+      "bodyStrong": {
+        "fontFamily": "interface",
+        "fontSize": "body",
+        "lineHeight": "body",
+        "fontWeight": "semibold"
+      },
+      "label": {
+        "fontFamily": "interface",
+        "fontSize": "label",
+        "lineHeight": "label",
+        "fontWeight": "semibold"
+      },
+      "code": {
+        "fontFamily": "code",
+        "fontSize": "label",
+        "lineHeight": "body",
+        "fontWeight": "regular"
+      }
+    },
+    "measure": {
+      "lesson": "720px"
+    }
+  },
+  "spacing": {
+    "0": "0px",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px",
+    "20": "80px",
+    "24": "96px"
+  },
+  "radius": {
+    "none": "0px",
+    "small": "4px",
+    "control": "8px",
+    "container": "12px",
+    "pill": "999px"
+  },
+  "size": {
+    "minimumTouchTarget": "44px",
+    "lessonMeasure": "720px"
+  },
+  "motion": {
+    "duration": {
+      "instant": "0ms",
+      "fast": "120ms",
+      "standard": "200ms",
+      "deliberate": "320ms",
+      "milestone": "480ms"
+    },
+    "easing": {
+      "standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "emphasized": "cubic-bezier(0.2, 0.8, 0.2, 1)"
+    },
+    "reducedMotion": {
+      "duration": "0ms",
+      "distance": "0px"
+    }
+  },
+  "breakpoints": {
+    "mobile": "0px",
+    "desktopNavigation": "768px",
+    "desktop": "1280px",
+    "wide": "1440px"
+  },
+  "validationViewports": [
+    "360px",
+    "390px",
+    "768px",
+    "1280px",
+    "1440px"
+  ],
+  "elevation": {
+    "none": "none",
+    "overlayLight": "0 12px 32px rgba(28, 24, 19, 0.16)",
+    "overlayDark": "0 12px 32px rgba(0, 0, 0, 0.48)",
+    "draggedLight": "0 8px 20px rgba(28, 24, 19, 0.18)",
+    "draggedDark": "0 8px 20px rgba(0, 0, 0, 0.52)"
+  },
+  "defaults": {
+    "accent": "cerulean",
+    "appearance": "system",
+    "sound": false,
+    "brandMarkAccent": "cerulean"
+  }
+}

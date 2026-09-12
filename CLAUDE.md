@@ -14,6 +14,8 @@ Planning stage. There is no source code, build system, lint, or test suite yet, 
 
 - `docs/learning-model.md` — the current direction. Every lesson has two halves: **Learn** on the web (short, interactive, Brilliant-style explanation built from six blocks) and **Do** inside the real tool (VS Code, or Godot for game dev) guided by a Forked companion extension that checks each step against actual editor, filesystem, and git state. Also covers progression, certifications, the MVP slice, risks, and the open decisions.
 - `docs/fundamentals.md` — the ~8-week fundamentals curriculum: module goals, the Learn blocks and Do step types each module uses, per-module projects, the author-reference catalog with licenses, and the GitHub Foundations cert.
+- `docs/design-system.md` — the visual language and interaction contracts shared by the Learn web experience, mobile navigation, and the VS Code Do experience, including references to the canonical Stitch screens.
+- `docs/design-tokens.json` — the machine-readable source for shared color, typography, spacing, radius, motion, breakpoint, and preference tokens.
 - The README's "Learning format" section summarizes the same model. All three are reconciled; keep them that way when one changes.
 
 Things the model explicitly rejects: video-then-quiz, multiple-choice as a teaching device (it exists only in certification practice exams), link-out to external sites for learning, in-browser sandboxes for terminal/git/code, and screen capture. Don't write content or code that assumes any of those without checking with the officers.

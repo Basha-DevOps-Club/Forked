@@ -28,7 +28,7 @@ Every lesson has two halves, and nothing sends the student to an outside site to
 - **Learn (web)** — a short, interactive explanation of the concept, Brilliant-style: one idea per screen with something to predict, fill in, or reorder before moving on. Not video-then-quiz.
 - **Do (in the real tool)** — a Forked companion extension inside VS Code (or Godot for game dev) guides the student step by step, checks each step against the actual project state, and pops up the next thing to do. Real terminal, real git, real runtime.
 
-The web app is also home base: the learning path, progress, the student profile, and matching. Full design in [docs/learning-model.md](docs/learning-model.md).
+The web app is also home base: the learning path, progress, the student profile, and matching. Full learning design is in [docs/learning-model.md](docs/learning-model.md). The shared visual and interaction system is in [docs/design-system.md](docs/design-system.md), with implementation values in [docs/design-tokens.json](docs/design-tokens.json).
 
 Lessons are club-authored. External resources are reference material for authors; content is only incorporated directly when its license permits it (public domain or MIT-licensed).
 

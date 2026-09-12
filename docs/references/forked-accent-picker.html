@@ -1,0 +1,472 @@
+<section id="forked-blue-picker" aria-labelledby="forked-blue-picker-title">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500&display=swap');
+
+    #forked-blue-picker {
+      color: var(--foreground);
+      background: transparent;
+      font-family: Manrope, sans-serif;
+    }
+
+    #forked-blue-picker .picker-heading {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    #forked-blue-picker .picker-heading > * {
+      margin: 0;
+    }
+
+    #forked-blue-picker .blue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    #forked-blue-picker .swatch-content {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+    }
+
+    #forked-blue-picker .swatch-color {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--candidate);
+    }
+
+    #forked-blue-picker .swatch-copy {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    #forked-blue-picker .swatch-name {
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .swatch-hex {
+      color: var(--muted-foreground);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    #forked-blue-picker .selected-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+
+    #forked-blue-picker .selected-value {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    #forked-blue-picker .selected-value code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    #forked-blue-picker .fixed-canvas {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted-foreground);
+      background: var(--secondary);
+    }
+
+    #forked-blue-picker .canvas-chip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 22px;
+      height: 14px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+      border-radius: 4px;
+    }
+
+    #forked-blue-picker .canvas-chip span:first-child {
+      background: #F7F1E8;
+    }
+
+    #forked-blue-picker .canvas-chip span:last-child {
+      background: #17120D;
+    }
+
+    #forked-blue-picker .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    #forked-blue-picker .forked-preview {
+      --fp-radius: 10px;
+      --fp-soft-accent: color-mix(in srgb, var(--fp-accent) 11%, transparent);
+      overflow: hidden;
+      min-width: 0;
+      border: 1px solid var(--fp-border);
+      border-radius: 14px;
+      color: var(--fp-text);
+      background: var(--fp-bg);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--fp-shadow) 10%, transparent);
+    }
+
+    #forked-blue-picker .forked-preview.light {
+      --fp-bg: #ffffff;
+      --fp-surface: #f6f7f9;
+      --fp-text: #111318;
+      --fp-muted: #626874;
+      --fp-border: #dde1e8;
+      --fp-code: #111318;
+      --fp-code-text: #f5f7fb;
+      --fp-shadow: #101828;
+    }
+
+    #forked-blue-picker .forked-preview.dark {
+      --fp-bg: #0e1014;
+      --fp-surface: #171a20;
+      --fp-text: #f7f8fa;
+      --fp-muted: #a9afba;
+      --fp-border: #2b3039;
+      --fp-code: #08090c;
+      --fp-code-text: #f5f7fb;
+      --fp-shadow: #000000;
+    }
+
+    #forked-blue-picker .preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--fp-border);
+    }
+
+    #forked-blue-picker .brand-lockup,
+    #forked-blue-picker .preview-theme-label,
+    #forked-blue-picker .lesson-meta,
+    #forked-blue-picker .video-link,
+    #forked-blue-picker .preview-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    #forked-blue-picker .brand-lockup {
+      gap: 7px;
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .brand-lockup svg,
+    #forked-blue-picker .video-link svg {
+      color: var(--fp-accent-text);
+    }
+
+    #forked-blue-picker .preview-theme-label {
+      gap: 6px;
+      color: var(--fp-muted);
+    }
+
+    #forked-blue-picker .lesson-progress {
+      height: 4px;
+      background: var(--fp-border);
+    }
+
+    #forked-blue-picker .lesson-progress > span {
+      display: block;
+      width: 38%;
+      height: 100%;
+      background: var(--fp-accent);
+    }
+
+    #forked-blue-picker .preview-content {
+      display: grid;
+      gap: 16px;
+      padding: 22px 20px 20px;
+    }
+
+    #forked-blue-picker .lesson-meta {
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--fp-muted);
+    }
+
+    #forked-blue-picker .mode-label {
+      color: var(--fp-accent-text);
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .preview-copy {
+      display: grid;
+      gap: 8px;
+    }
+
+    #forked-blue-picker .preview-copy > * {
+      margin: 0;
+    }
+
+    #forked-blue-picker .preview-copy strong {
+      color: var(--fp-accent-text);
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .code-sample {
+      margin: 0;
+      padding: 13px 14px;
+      overflow-wrap: anywhere;
+      border-radius: var(--fp-radius);
+      color: var(--fp-code-text);
+      background: var(--fp-code);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    #forked-blue-picker .video-link {
+      width: fit-content;
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid var(--fp-border);
+      border-radius: var(--fp-radius);
+      color: var(--fp-text);
+      background: var(--fp-surface);
+      font: inherit;
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .preview-actions {
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    #forked-blue-picker .preview-primary {
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--fp-radius);
+      color: var(--fp-accent-foreground);
+      background: var(--fp-accent);
+      font: inherit;
+      font-weight: 500;
+    }
+
+    #forked-blue-picker .accent-example {
+      padding: 10px 12px;
+      border-left: 3px solid var(--fp-accent);
+      border-radius: 0 var(--fp-radius) var(--fp-radius) 0;
+      color: var(--fp-text);
+      background: var(--fp-soft-accent);
+    }
+
+    @media (max-width: 720px) {
+      #forked-blue-picker .blue-grid,
+      #forked-blue-picker .preview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <header class="picker-heading">
+    <h2 id="forked-blue-picker-title">Choose your Forked accent</h2>
+    <p class="text-muted">Six distinct hues, tuned to the same visual weight as Cerulean. The Warm Sand canvas stays consistent.</p>
+  </header>
+
+  <div class="blue-grid" id="blue-options" aria-label="Forked accent choices"></div>
+
+  <div class="selected-line" aria-live="polite">
+    <div class="selected-value">
+      <span>Selected:</span>
+      <strong id="selected-name">Cerulean</strong>
+      <code id="selected-hex">#087EA4</code>
+      <span class="fixed-canvas"><span class="canvas-chip" aria-hidden="true"><span></span><span></span></span>Warm Sand · fixed</span>
+      <span class="text-small text-muted tabular-nums" id="contrast-note"></span>
+    </div>
+    <button type="button" class="btn btn-primary" id="choose-blue">Use Cerulean theme</button>
+  </div>
+
+  <div class="preview-grid" id="forked-preview-comparison" aria-label="Forked light and dark theme comparison">
+    <article class="forked-preview light" data-preview="light" aria-label="Light theme preview">
+      <div class="preview-bar">
+        <span class="brand-lockup"><i data-lucide="git-fork" aria-hidden="true"></i> Forked</span>
+        <span class="preview-theme-label text-small"><i data-lucide="sun" aria-hidden="true"></i> Light</span>
+      </div>
+      <div class="lesson-progress" aria-label="Lesson progress: 38 percent"><span></span></div>
+      <div class="preview-content">
+        <div class="lesson-meta text-small"><span class="mode-label">LEARN · GIT BASICS</span><span>2 of 6</span></div>
+        <div class="preview-copy">
+          <h3>A branch is a movable pointer.</h3>
+          <p>It gives new work a name without changing <strong>main</strong>. Create one before you make the next commit.</p>
+        </div>
+        <pre class="code-sample"><code>git switch -c feature/card</code></pre>
+        <button type="button" class="video-link"><i data-lucide="circle-play" aria-hidden="true"></i> Watch 48-sec explainer</button>
+        <div class="accent-example">Next, predict which branch moves after a commit.</div>
+        <div class="preview-actions"><button type="button" class="preview-primary">I’m ready to predict</button></div>
+      </div>
+    </article>
+
+    <article class="forked-preview dark" data-preview="dark" aria-label="Dark theme preview">
+      <div class="preview-bar">
+        <span class="brand-lockup"><i data-lucide="git-fork" aria-hidden="true"></i> Forked</span>
+        <span class="preview-theme-label text-small"><i data-lucide="moon" aria-hidden="true"></i> Dark</span>
+      </div>
+      <div class="lesson-progress" aria-label="Lesson progress: 38 percent"><span></span></div>
+      <div class="preview-content">
+        <div class="lesson-meta text-small"><span class="mode-label">LEARN · GIT BASICS</span><span>2 of 6</span></div>
+        <div class="preview-copy">
+          <h3>A branch is a movable pointer.</h3>
+          <p>It gives new work a name without changing <strong>main</strong>. Create one before you make the next commit.</p>
+        </div>
+        <pre class="code-sample"><code>git switch -c feature/card</code></pre>
+        <button type="button" class="video-link"><i data-lucide="circle-play" aria-hidden="true"></i> Watch 48-sec explainer</button>
+        <div class="accent-example">Next, predict which branch moves after a commit.</div>
+        <div class="preview-actions"><button type="button" class="preview-primary">I’m ready to predict</button></div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('forked-blue-picker');
+      const optionsRoot = document.getElementById('blue-options');
+      const selectedName = document.getElementById('selected-name');
+      const selectedHex = document.getElementById('selected-hex');
+      const contrastNote = document.getElementById('contrast-note');
+      const chooseButton = document.getElementById('choose-blue');
+      const candidates = [
+        { name: 'Cerulean', hex: '#087EA4' },
+        { name: 'Violet', hex: '#7D63A8' },
+        { name: 'Rose', hex: '#A75664' },
+        { name: 'Coral', hex: '#A85A46' },
+        { name: 'Amber', hex: '#936B17' },
+        { name: 'Emerald', hex: '#358557' }
+      ];
+      const background = {
+        name: 'Warm Sand',
+        light: { bg: '#F7F1E8', surface: '#FFFCF7', text: '#1C1813', muted: '#70675D', border: '#E3D8C9', code: '#1A1611', codeText: '#FAF4EC', shadow: '#281D12' },
+        dark: { bg: '#17120D', surface: '#211A13', text: '#FAF4EC', muted: '#BAAEA1', border: '#3E3227', code: '#0C0906', codeText: '#FAF4EC', shadow: '#000000' }
+      };
+      const state = { name: 'Cerulean', accent: '#087EA4' };
+
+      const toRgb = (hex) => {
+        const value = parseInt(hex.slice(1), 16);
+        return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
+      };
+
+      const toHex = (rgb) => '#' + rgb.map((value) => Math.round(value).toString(16).padStart(2, '0')).join('').toUpperCase();
+
+      const mix = (a, b, amount) => {
+        const first = toRgb(a);
+        const second = toRgb(b);
+        return toHex(first.map((value, index) => value + (second[index] - value) * amount));
+      };
+
+      const luminance = (hex) => toRgb(hex)
+        .map((value) => {
+          const channel = value / 255;
+          return channel <= 0.04045 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+        })
+        .reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
+
+      const contrast = (a, b) => {
+        const first = luminance(a);
+        const second = luminance(b);
+        return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
+      };
+
+      const accessibleAccent = (accent, background, toward) => {
+        let candidate = accent;
+        for (let step = 0; step <= 20 && contrast(candidate, background) < 4.5; step += 1) {
+          candidate = mix(accent, toward, step / 20);
+        }
+        return candidate;
+      };
+
+      const readableText = (background) => contrast('#FFFFFF', background) >= 4.5 ? '#FFFFFF' : '#080A0F';
+
+      const applyBackground = (preview, tokens) => {
+        preview.style.setProperty('--fp-bg', tokens.bg);
+        preview.style.setProperty('--fp-surface', tokens.surface);
+        preview.style.setProperty('--fp-text', tokens.text);
+        preview.style.setProperty('--fp-muted', tokens.muted);
+        preview.style.setProperty('--fp-border', tokens.border);
+        preview.style.setProperty('--fp-code', tokens.code);
+        preview.style.setProperty('--fp-code-text', tokens.codeText);
+        preview.style.setProperty('--fp-shadow', tokens.shadow);
+      };
+
+      const render = () => {
+        const lightTextAccent = accessibleAccent(state.accent, background.light.bg, '#000000');
+        const darkTextAccent = accessibleAccent(state.accent, background.dark.bg, '#FFFFFF');
+        const lightPreview = root.querySelector('[data-preview="light"]');
+        const darkPreview = root.querySelector('[data-preview="dark"]');
+
+        applyBackground(lightPreview, background.light);
+        applyBackground(darkPreview, background.dark);
+        lightPreview.style.setProperty('--fp-accent', state.accent);
+        lightPreview.style.setProperty('--fp-accent-text', lightTextAccent);
+        lightPreview.style.setProperty('--fp-accent-foreground', readableText(state.accent));
+        darkPreview.style.setProperty('--fp-accent', darkTextAccent);
+        darkPreview.style.setProperty('--fp-accent-text', darkTextAccent);
+        darkPreview.style.setProperty('--fp-accent-foreground', readableText(darkTextAccent));
+
+        selectedName.textContent = state.name;
+        selectedHex.textContent = state.accent.toUpperCase();
+        contrastNote.textContent = `Light ${contrast(lightTextAccent, background.light.bg).toFixed(1)}:1 · Dark ${contrast(darkTextAccent, background.dark.bg).toFixed(1)}:1`;
+        chooseButton.textContent = `Use ${state.name} theme`;
+
+        root.querySelectorAll('[data-blue]').forEach((button) => {
+          const active = button.dataset.blue === state.accent.toUpperCase();
+          button.setAttribute('aria-pressed', String(active));
+          button.classList.toggle('is-selected', active);
+        });
+
+        if (globalThis.lucide) {
+          lucide.createIcons({ attrs: { width: 16, height: 16 } });
+        }
+      };
+
+      candidates.forEach((candidate) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn viz-tile';
+        button.dataset.blue = candidate.hex;
+        button.setAttribute('aria-label', `${candidate.name}, ${candidate.hex}`);
+        button.setAttribute('aria-pressed', 'false');
+        button.innerHTML = `
+          <span class="swatch-content">
+            <span class="swatch-color" style="--candidate:${candidate.hex}" aria-hidden="true"></span>
+            <span class="swatch-copy">
+              <span class="swatch-name">${candidate.name}</span>
+              <span class="swatch-hex text-small">${candidate.hex}</span>
+            </span>
+          </span>`;
+        button.addEventListener('click', () => {
+          state.name = candidate.name;
+          state.accent = candidate.hex;
+          render();
+        });
+        optionsRoot.appendChild(button);
+      });
+
+      chooseButton.addEventListener('click', async () => {
+        if (window.openai?.sendFollowUpMessage) {
+          await window.openai.sendFollowUpMessage({
+            title: `Use the ${state.name} theme?`,
+            prompt: `I choose ${state.name} (${state.accent.toUpperCase()}) as my Forked accent with the fixed Warm Sand background. Lock it into the design-system plan and continue the interview.`
+          });
+        }
+      });
+
+      render();
+    })();
+  </script>
+</section>
