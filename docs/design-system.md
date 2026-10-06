@@ -100,11 +100,13 @@ Respect `prefers-reduced-motion`: remove travel, branch drawing, and confetti; r
 
 ## Token contract
 
-[`design-tokens.json`](design-tokens.json) is platform-agnostic JSON and is the canonical value source for web CSS variables, Tailwind/shadcn theme bindings, Stitch generation, and extension theme adapters. Its stable namespaces are `color.neutral`, `color.code`, `color.onAccent`, `color.accent`, `color.track`, `color.status`, `typography`, `spacing`, `radius`, `size`, `motion`, `breakpoints`, `elevation`, and `defaults`.
+[`design-tokens.json`](design-tokens.json) is platform-agnostic JSON and is the canonical value source for web CSS variables, Tailwind/shadcn theme bindings, and extension theme adapters. Its stable namespaces are `color.neutral`, `color.code`, `color.onAccent`, `color.accent`, `color.track`, `color.status`, `typography`, `spacing`, `radius`, `size`, `motion`, `breakpoints`, `elevation`, and `defaults`.
 
 Consumer adapters map those source paths to semantic roles—canvas, surface, text, border, action, focus, progress, feedback, code, and overlay—for the active appearance and accent. Components consume those semantic aliases rather than repeating JSON paths or hex values. A component-specific token may alias a semantic role, but it must not introduce an unregistered color.
 
 Appearance defaults to the operating system. Theme preference is synchronized through the student profile and cached locally so web and extension can render the last known choice before remote data arrives. Remote `updatedAt` resolves conflicts; while offline, use the cached preference and queue the next sync. Never flash a different accent or appearance during hydration.
+
+All 12 accent/appearance combinations passed the defined normal-text pairings: light action labels have at least 4.82:1, light accent text at least 4.65:1, and dark accent text at least 6.43:1 (Emerald is the tightest in each pairing; the other five accents are at least 5.75:1, 6.21:1, and 6.55:1). Strong neutral boundaries reach at least 3.25:1 in light appearance and 3.30:1 in dark appearance. These figures were recomputed for Soft Stone. Default decorative borders must not be used as the sole interactive boundary. Browser interaction, keyboard, screen-reader, handoff-state, and five-viewport checks must be performed on runnable screens before claiming those checks pass.
 
 The VS Code host is the one deliberate surface exception: editor chrome continues to use native `--vscode-*` theme colors. The Forked panel uses native structure and typography where required by the host, then applies the student's Forked accent to actions, focus, progress, and selections. Do not recolor the surrounding editor or simulate VS Code in the web app.
 
@@ -236,9 +238,9 @@ Forked targets WCAG 2.2 AA across all six accents in both light and dark appeara
 - Error messages identify the problem next to the relevant control and preserve the student's work.
 - The code surface supports horizontal scrolling without forcing the whole page to scroll sideways, and code meaning never depends only on syntax color.
 
-## Stitch screen briefs
+## Key screens
 
-Create one Stitch project named **Forked — Design System**. Upload this specification as `DESIGN.md`, create one agnostic design-system asset from it, and use that asset for every screen. Generate the six anchor screens in light appearance with Emerald as the personal accent, then generate the two named dark variants. Use exact tokens, Manrope, JetBrains Mono, rounded Lucide-style icons, and the `GitFork` placeholder. Do not add texture, paper styling, glass, decorative gradients, ambient card shadows, or unrequested illustration.
+These six anchor screens and two dark variants define the first implementation targets. Each lists its frame, the outcome it must achieve, its content, and a visual check. Use exact tokens, Manrope, JetBrains Mono, rounded Lucide-style icons, and the `GitFork` placeholder, with Emerald as the personal accent. Do not add texture, paper styling, glass, decorative gradients, ambient card shadows, or unrequested illustration.
 
 ### 1. Desktop Home — resume first
 
@@ -296,43 +298,9 @@ Duplicate anchor 3 without changing frame, spacing, content, component placement
 
 Duplicate anchor 5 without changing frame, content, component placement, or interaction state. Switch VS Code to a credible native dark theme and use Forked's dark-compatible accent roles in the extension panel. Do not paint the editor chrome Soft Stone or replace host theme tokens.
 
-## Stitch artifact registry
-
-Update this registry after each successful creation. IDs are intentionally blank until Stitch returns them. If generation times out, do not submit a duplicate request; poll for the resulting artifact, then record it here.
-
-| Artifact | Stitch name | ID | Status / notes |
-|---|---|---|---|
-| Project | Forked — Design System | `projects/16567696131374142893` | Created private; existing projects untouched |
-| Design-system asset | Forked Design System | `assets/e22bf22d5c3a4f4e96cca0e66f454896` | Agnostic asset; corrective theme update submitted in session `9857132063308128776` |
-| DESIGN.md upload | DESIGN.md | `8148082560703981018` | Uploaded specification |
-| Screen 1 | Desktop Home — Resume first | `dcfee6c963254f22b2a04448adad58c3` | Latest refined light anchor; older draft `365473efec4f455dbd9dddad00dc92fe` |
-| Screen 2 | Mobile Roadmap — Shared trunk | `cc8fdd048e1c4967b6067d4fb9ed5019` | Latest refined mobile light anchor; older draft `6d04089964e740d5b33815b4164458d7` |
-| Screen 3 | Desktop Learn Predict — Git branches | `6198f6535fcb40629ac8215493efb2a9` | Latest refined light anchor; older draft `854559c60ecc4c4db353e72f71d59941` |
-| Screen 4 | Desktop connected handoff | `822606bcb62a4939b108d673969f1420` | Latest refined light anchor; older draft `93bda04c1edd43e88466d966e2a72d9b` |
-| Screen 5 | Desktop VS Code Do — Create a branch | `0e7e036dd4524780a781ebc42791219f` | Generated light anchor; refinement pending |
-| Screen 6 | Mobile completion — Branch growth | `6e7ba679aff2487c9d3c69adf3113ad0` | Generated; returned desktop metadata conflicts with mobile brief |
-| Variant A | Desktop Learn Predict — Dark | `9d5e3e2a7cba4dea9b2c77bc9ace9097` | Generated refined dark variant; verify exact layout parity |
-| Variant B | Desktop VS Code Do — Dark | `cdf7527990ee4a11933064cd9866b438` | Generated refined dark variant; verify exact layout parity |
-
-Open the private [Forked — Design System Stitch project](https://stitch.withgoogle.com/projects/16567696131374142893?pli=1) with an authorized signed-in account. Preserve screen names so future revisions can identify their source anchor unambiguously. The registry records remote artifacts; generated screen HTML and images have not been exported into this repository.
-
-### Generation verification status
-
-The generated artifacts are drafts, not accepted implementations. Screen resource names use `projects/16567696131374142893/screens/{ID}`. The authenticated project now exposes the two dark variants and refined light anchors; older drafts remain in the project and are preserved for traceability.
-
-Stitch's imported asset introduced cool-gray generic surface tokens, JetBrains Mono interface-label defaults, and a paper-like description that conflict with this specification. The repository tokens remain authoritative. Generated copy also introduces advanced curriculum claims and developer-facing status language absent from the approved briefs; these require removal or simplification. The Home includes an extra workspace-log region. Mobile completion returned desktop dimensions/device metadata. Exact frame sizes, responsive behavior, semantic colors, icon choice, and dark-layout preservation remain acceptance gates.
-
-The corrective theme update supplied this full specification, Manrope interface labels, Warm Sand neutral, accessible Cerulean actions, and 8px controls. Existing screen rendering still needs verification against that correction. The existing Stitch drafts also predate the October 2026 move to Soft Stone and Emerald, so they show the superseded Warm Sand and Cerulean palette.
-
-The token JSON parsed successfully. All 12 accent/appearance combinations passed the defined normal-text pairings: light action labels have at least 4.82:1, light accent text at least 4.65:1, and dark accent text at least 6.43:1 (Emerald is the tightest in each pairing; the other five accents are at least 5.75:1, 6.21:1, and 6.55:1). Strong neutral boundaries reach at least 3.25:1 in light appearance and 3.30:1 in dark appearance. These figures were recomputed for Soft Stone. Default decorative borders must not be used as the sole interactive boundary. Whitespace validation passed.
-
-Browser interaction, keyboard, screen-reader, handoff-state, and five-viewport checks must be performed on runnable screens before claiming those checks pass. Static generation descriptions do not constitute verification.
-
-Use the repository's agent-driven `/graphify . --update` skill for documentation indexing. The running agent performs semantic extraction when no Gemini key is configured; an API key is not required. The headless CLI is a separate execution path and must not be treated as a prerequisite. The filename filter can classify `design-tokens.json` as potentially sensitive; this file contains public design values, and the same values are documented here for semantic indexing.
-
 ## QA and acceptance criteria
 
-The documented direction is sufficient to begin implementation. The following are acceptance gates for the runnable implementation and generated screens, not claims that static drafts have passed:
+The documented direction is sufficient to begin implementation. The following are acceptance gates for the runnable implementation:
 
 ### Token and visual QA
 
@@ -367,9 +335,9 @@ The documented direction is sufficient to begin implementation. The following ar
 
 ## Implementation handoff
 
-Start with shared token adapters, the responsive app shell, and resume-first Home: desktop rail at 768px and above, mobile bottom navigation below it, fixed Soft Stone, and six personal accents. Continue with Roadmap, Learn, then the web-to-editor handoff and VS Code Do. Validate responsive behavior and accessibility as each slice becomes runnable. Do not copy unresolved Stitch details into code merely because they appear in a draft.
+Start with shared token adapters, the responsive app shell, and resume-first Home: desktop rail at 768px and above, mobile bottom navigation below it, fixed Soft Stone, and six personal accents. Continue with Roadmap, Learn, then the web-to-editor handoff and VS Code Do. Validate responsive behavior and accessibility as each slice becomes runnable.
 
-This repository still contains planning documents and visual references, not the running web app or extension. Remaining screen QA includes mobile completion sizing, light/dark layout parity, exact token/icon usage, simplified instructional copy, and the interaction checks above.
+This repository still contains planning documents and visual references, not the running web app or extension. Screen QA runs against the interaction checks above once screens exist.
 
 ## MVP boundaries
 
