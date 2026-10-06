@@ -8,32 +8,34 @@ Forked should feel like a focused workshop: clear enough for a beginner, credibl
 
 The interface is **clean and tonal-flat**. Use solid color, hierarchy, spacing, borders, and purposeful motion. Do not use paper texture or a paper metaphor, glass effects, decorative gradients, ambient card shadows, or illustration as structural decoration. Shadows are reserved for overlays and an item while it is being dragged.
 
-The permanent Forked brand mark is Cerulean, even when a student chooses a different personal accent. Until final logo artwork exists, use a rounded Lucide-style `GitFork` icon as the branching-mark placeholder. Product icons use the same rounded line style and must come from an icon library rather than improvised glyphs.
+The permanent Forked brand mark is Emerald, matching DevOps Club colors, even when a student chooses a different personal accent. Until final logo artwork exists, use a rounded Lucide-style `GitFork` icon as the branching-mark placeholder. Product icons use the same rounded line style and must come from an icon library rather than improvised glyphs.
 
 ## Foundations
 
 ### Approved direction and reference
 
-The accent interview settled on six different hues with a similar perceived brightness and intensity to Cerulean—not literally the same hue. Warm Sand stays fixed in each appearance; students choose only the accent. The exact approved palette and accessible variants below supersede exploratory values.
+The accent interview settled on six different hues with a similar perceived brightness and intensity—not literally the same hue. Soft Stone stays fixed in each appearance; students choose only the accent. The exact approved palette and accessible variants below supersede exploratory values.
+
+In October 2026 the neutral foundation moved from Warm Sand (beige canvas, brown-black dark) to Soft Stone, and the brand and default accent moved from Cerulean to Emerald to match club colors. The other five accents kept their values; all of them gain contrast on the whiter Soft Stone surfaces.
 
 The original [interactive accent picker](references/forked-accent-picker.html) is preserved as a historical visual reference. It is an HTML fragment from the conversation visualization host, not a production screen or standalone app. Its host styles, optional Lucide runtime, and follow-up-message bridge are external dependencies. Exploratory shadows, radii, dynamic contrast adjustments, and sample copy are not authoritative; use this specification and the token JSON for implementation.
 
 ### Color architecture
 
-Every Forked-owned surface uses the same neutral **Warm Sand** foundation. A student's theme changes the accent, not the canvas. Personal accents are intentionally limited to actions, progress, focus, and selections. They do not recolor the entire interface and never override semantic status colors or fixed track colors.
+Every Forked-owned surface uses the same neutral **Soft Stone** foundation: a near-neutral gray with only a trace of warmth, so it reads clean without turning beige. A student's theme changes the accent, not the canvas. Personal accents are intentionally limited to actions, progress, focus, and selections. They do not recolor the entire interface and never override semantic status colors or fixed track colors.
 
-#### Warm Sand
+#### Soft Stone
 
 | Role | Light | Dark | Use |
 |---|---:|---:|---|
-| Canvas | `#F7F1E8` | `#17120D` | Page and full-screen background |
-| Surface | `#FFFCF7` | `#211A13` | Raised-by-border panels, controls, menus |
-| Text | `#1C1813` | `#FAF4EC` | Primary copy and headings |
-| Muted text | `#70675D` | `#BAAEA1` | Secondary copy and metadata |
-| Border | `#E3D8C9` | `#3E3227` | Default separators and component outlines |
-| Strong border | `#958A7F` | `#776B60` | Emphasized boundaries and inactive control outlines |
-| Code surface | `#1A1611` | `#0C0906` | Code, terminal, and diff content |
-| Code text | `#FAF4EC` | `#FAF4EC` | Text on a code surface |
+| Canvas | `#F5F5F2` | `#131312` | Page and full-screen background |
+| Surface | `#FFFFFF` | `#1C1C1A` | Raised-by-border panels, controls, menus |
+| Text | `#1A1A18` | `#F5F5F2` | Primary copy and headings |
+| Muted text | `#66645E` | `#AAA8A1` | Secondary copy and metadata |
+| Border | `#E2E1DC` | `#33322E` | Default separators and component outlines |
+| Strong border | `#8A8882` | `#6F6D67` | Emphasized boundaries and inactive control outlines |
+| Code surface | `#1A1A18` | `#0C0C0B` | Code, terminal, and diff content |
+| Code text | `#F5F5F2` | `#F5F5F2` | Text on a code surface |
 
 The surface hierarchy is canvas → surface → overlay. Canvas and surface differ tonally and by border; neither receives a default shadow. Code remains dark in both appearances so code has one stable visual context.
 
@@ -41,19 +43,19 @@ The surface hierarchy is canvas → surface → overlay. Canvas and surface diff
 
 | Accent ID | Base | Light action | Light text | Dark |
 |---|---:|---:|---:|---:|
+| `emerald` (default) | `#1C824F` | `#1C824F` | `#1B7E4D` | `#26B56E` |
 | `cerulean` | `#087EA4` | `#006E93` | `#006287` | `#51B1D9` |
 | `violet` | `#7D63A8` | `#6D5397` | `#62488A` | `#AF95DE` |
 | `rose` | `#A75664` | `#954655` | `#893B4A` | `#DE8895` |
 | `coral` | `#A85A46` | `#964A37` | `#893E2B` | `#DF8C76` |
 | `amber` | `#936B17` | `#825B00` | `#765000` | `#C79D51` |
-| `emerald` | `#358557` | `#227548` | `#10693D` | `#6AB987` |
 
 Use the named variant from `color.accent.<id>` rather than assuming the base swatch is safe for every role:
 
 - `base` is the approved identity swatch for non-text accents, diagrams, badges, and progress.
-- `action` is the accessible light-appearance fill for controls; its foreground is `color.onAccent.light` (`#FFFCF7`).
-- `text` is the accessibility-safe light-appearance value for links, labels, and other small text on Warm Sand.
-- `dark` is the accessible dark-appearance value for fills, focus, progress, links, and labels; text placed on that color uses `color.onAccent.dark` (`#17120D`).
+- `action` is the accessible light-appearance fill for controls; its foreground is `color.onAccent.light` (`#FFFFFF`).
+- `text` is the accessibility-safe light-appearance value for links, labels, and other small text on Soft Stone.
+- `dark` is the accessible dark-appearance value for fills, focus, progress, links, and labels; text placed on that color uses `color.onAccent.dark` (`#0C0C0B`).
 - Focus indicators use the focus-ring semantic token and must remain distinguishable from both the control and its surroundings.
 
 #### Track colors
@@ -214,7 +216,7 @@ type FeedbackState =
   | "correct" | "revealed";
 ```
 
-Defaults are `{ accent: "cerulean", appearance: "system", sound: false }`; `updatedAt` is set when the preference is first persisted. `Appearance.system` resolves independently on each device while the selected accent and sound preference stay account-wide.
+Defaults are `{ accent: "emerald", appearance: "system", sound: false }`; `updatedAt` is set when the preference is first persisted. `Appearance.system` resolves independently on each device while the selected accent and sound preference stay account-wide.
 
 ## Accessibility contract
 
@@ -234,7 +236,7 @@ Forked targets WCAG 2.2 AA across all six accents in both light and dark appeara
 
 ## Stitch screen briefs
 
-Create one Stitch project named **Forked — Design System**. Upload this specification as `DESIGN.md`, create one agnostic design-system asset from it, and use that asset for every screen. Generate the six anchor screens in light appearance with Cerulean as the personal accent, then generate the two named dark variants. Use exact tokens, Manrope, JetBrains Mono, rounded Lucide-style icons, and the `GitFork` placeholder. Do not add texture, paper styling, glass, decorative gradients, ambient card shadows, or unrequested illustration.
+Create one Stitch project named **Forked — Design System**. Upload this specification as `DESIGN.md`, create one agnostic design-system asset from it, and use that asset for every screen. Generate the six anchor screens in light appearance with Emerald as the personal accent, then generate the two named dark variants. Use exact tokens, Manrope, JetBrains Mono, rounded Lucide-style icons, and the `GitFork` placeholder. Do not add texture, paper styling, glass, decorative gradients, ambient card shadows, or unrequested illustration.
 
 ### 1. Desktop Home — resume first
 
@@ -242,7 +244,7 @@ Create one Stitch project named **Forked — Design System**. Upload this specif
 - **Primary outcome:** the student immediately resumes the exact active lesson and sees what comes next.
 - **Content:** Forked mark; Learn selected in the rail; “Welcome back” greeting; dominant resume region for “Git & GitHub · Branches,” showing Learn/Do status and one primary Resume action; compact weekly/unit progress; a small preview of the next roadmap nodes.
 - **Hierarchy:** resume is the only primary action. Progress is mastery-oriented; do not show grades, due dates, lives, or a feature-dashboard grid.
-- **Visual check:** Warm Sand canvas, bordered surfaces, Cerulean action/progress only, fixed track color only where a track is explicitly labeled.
+- **Visual check:** Soft Stone canvas, bordered surfaces, Emerald action/progress only, fixed track color only where a track is explicitly labeled.
 
 ### 2. Mobile Roadmap — shared trunk to branches
 
@@ -250,7 +252,7 @@ Create one Stitch project named **Forked — Design System**. Upload this specif
 - **Primary outcome:** the student understands their current position and how Fundamentals leads to specialization.
 - **Content:** compact title/status header; scrollable vertical Fundamentals path with completed, current, available, and locked nodes; a visible specialization fork into Front End, Game Dev, AI, and Data branches; bottom destinations Learn, Roadmap, Projects, Profile.
 - **Behavior implied by the still:** the current node is actionable, labels accompany every state, content clears the safe-area-aware bottom bar.
-- **Visual check:** track colors only begin at named branches; the current personal progress remains Cerulean.
+- **Visual check:** track colors only begin at named branches; the current personal progress remains Emerald.
 
 ### 3. Desktop Learn Predict — Git branches
 
@@ -274,7 +276,7 @@ Create one Stitch project named **Forked — Design System**. Upload this specif
 - **Primary outcome:** the student knows the one real action to take and how completion is checked.
 - **Content:** credible native editor chrome and workspace; Source Control/terminal pointer treatment; Forked side panel with “Step 3 of 7 — Create a branch”; instruction to create and switch to `feature/card`; factual check “Current branch is feature/card”; collapsed Hint revealing `git switch -c feature/card`; reserved Help me placement unavailable for MVP.
 - **State:** waiting on the check, with the student's real workspace visible. Include the progress indicator and a clear connected/sync status.
-- **Visual check:** native VS Code structural colors remain intact; Cerulean is limited to Forked action, focus, progress, and selected pointer. The panel feels native rather than like a miniature website.
+- **Visual check:** native VS Code structural colors remain intact; Emerald is limited to Forked action, focus, progress, and selected pointer. The panel feels native rather than like a miniature website.
 
 ### 6. Mobile completion — branch growth
 
@@ -290,7 +292,7 @@ Duplicate anchor 3 without changing frame, spacing, content, component placement
 
 ### Dark variant B. Desktop VS Code Do
 
-Duplicate anchor 5 without changing frame, content, component placement, or interaction state. Switch VS Code to a credible native dark theme and use Forked's dark-compatible accent roles in the extension panel. Do not paint the editor chrome Warm Sand or replace host theme tokens.
+Duplicate anchor 5 without changing frame, content, component placement, or interaction state. Switch VS Code to a credible native dark theme and use Forked's dark-compatible accent roles in the extension panel. Do not paint the editor chrome Soft Stone or replace host theme tokens.
 
 ## Stitch artifact registry
 
@@ -318,9 +320,9 @@ The generated artifacts are drafts, not accepted implementations. Screen resourc
 
 Stitch's imported asset introduced cool-gray generic surface tokens, JetBrains Mono interface-label defaults, and a paper-like description that conflict with this specification. The repository tokens remain authoritative. Generated copy also introduces advanced curriculum claims and developer-facing status language absent from the approved briefs; these require removal or simplification. The Home includes an extra workspace-log region. Mobile completion returned desktop dimensions/device metadata. Exact frame sizes, responsive behavior, semantic colors, icon choice, and dark-layout preservation remain acceptance gates.
 
-The corrective theme update supplied this full specification, Manrope interface labels, Warm Sand neutral, accessible Cerulean actions, and 8px controls. Existing screen rendering still needs verification against that correction.
+The corrective theme update supplied this full specification, Manrope interface labels, Warm Sand neutral, accessible Cerulean actions, and 8px controls. Existing screen rendering still needs verification against that correction. The existing Stitch drafts also predate the October 2026 move to Soft Stone and Emerald, so they show the superseded Warm Sand and Cerulean palette.
 
-The token JSON parsed successfully. All 12 accent/appearance combinations passed the defined normal-text pairings: light action labels have at least 5.54:1, light accent text at least 6.01:1, and dark accent text at least 6.60:1. Strong neutral boundaries reach at least 3.01:1 in light appearance and 3.32:1 in dark appearance. Default decorative borders must not be used as the sole interactive boundary. Whitespace validation passed.
+The token JSON parsed successfully. All 12 accent/appearance combinations passed the defined normal-text pairings: light action labels have at least 4.82:1, light accent text at least 4.65:1, and dark accent text at least 6.43:1 (Emerald is the tightest in each pairing; the other five accents are at least 5.75:1, 6.21:1, and 6.55:1). Strong neutral boundaries reach at least 3.25:1 in light appearance and 3.30:1 in dark appearance. These figures were recomputed for Soft Stone. Default decorative borders must not be used as the sole interactive boundary. Whitespace validation passed.
 
 Browser interaction, keyboard, screen-reader, handoff-state, and five-viewport checks must be performed on runnable screens before claiming those checks pass. Static generation descriptions do not constitute verification.
 
@@ -334,7 +336,7 @@ The documented direction is sufficient to begin implementation. The following ar
 
 - Validate all 12 personal-accent/appearance combinations against WCAG 2.2 AA: `4.5:1` normal text and `3:1` large text and meaningful interactive boundaries.
 - Compare rendered semantic values with [`design-tokens.json`](design-tokens.json); no screen uses an unregistered hex value for product UI.
-- Confirm Warm Sand remains fixed when changing accent, track colors remain fixed when changing personal theme, and the Forked brand mark remains Cerulean.
+- Confirm Soft Stone remains fixed when changing accent, track colors remain fixed when changing personal theme, and the Forked brand mark remains Emerald.
 - Confirm every screen is tonal-flat: no texture, paper metaphor, glass effect, decorative gradient, ambient card shadow, decorative illustration, or improvised icon.
 - Confirm code uses JetBrains Mono on the stable dark code surface and interface text uses Manrope.
 
@@ -363,7 +365,7 @@ The documented direction is sufficient to begin implementation. The following ar
 
 ## Implementation handoff
 
-Start with shared token adapters, the responsive app shell, and resume-first Home: desktop rail at 768px and above, mobile bottom navigation below it, fixed Warm Sand, and six personal accents. Continue with Roadmap, Learn, then the web-to-editor handoff and VS Code Do. Validate responsive behavior and accessibility as each slice becomes runnable. Do not copy unresolved Stitch details into code merely because they appear in a draft.
+Start with shared token adapters, the responsive app shell, and resume-first Home: desktop rail at 768px and above, mobile bottom navigation below it, fixed Soft Stone, and six personal accents. Continue with Roadmap, Learn, then the web-to-editor handoff and VS Code Do. Validate responsive behavior and accessibility as each slice becomes runnable. Do not copy unresolved Stitch details into code merely because they appear in a draft.
 
 This repository still contains planning documents and visual references, not the running web app or extension. Remaining screen QA includes mobile completion sizing, light/dark layout parity, exact token/icon usage, simplified instructional copy, and the interaction checks above.
 
