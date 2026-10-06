@@ -73,6 +73,8 @@ Use track colors only on roadmap branches, track badges, and explanatory diagram
 
 Semantic success, warning, and error colors are separate token roles. Do not derive them from the student's accent, and never communicate a state through color alone.
 
+Success shares the Emerald hue with the brand and default accent, so the two must stay distinguishable by form, not color. Every success state (a `correct` answer, a passed check, a completed step) shows a check icon and a text label such as "Correct" or "Step passed," and appears as feedback near the result, never as a filled button. Emerald fills are reserved for actions. A green button never means "you were right."
+
 ### Typography
 
 - **Interface and learning copy:** Manrope.
